@@ -1,0 +1,31 @@
+{
+    "name": "dtabirca/wp-race-plugin",
+    "description": "Manages running competitions.",
+    "version": "1.0.0-dev",
+    "type": "project",
+    "homepage": "https://github.com/dtabirca/WP-Race-Plugin",
+    "authors": [
+        {
+            "name": "Daniel Tabirca",
+            "email": "dtabirca@gmail.com",
+            "homepage": "https://github.com/dtabirca",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [        
+        {
+            "type": "vcs",
+            "url": "https://github.com/dtabirca/WP-Race-Plugin.git"
+        }       
+    ],
+    "require": {
+        "php": ">=7.4",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": { "RunRace\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "RunRace\\Tests\\": "tests/" }
+    }
+}

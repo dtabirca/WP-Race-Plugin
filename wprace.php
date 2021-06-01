@@ -22,10 +22,58 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
+if ( ! defined( 'WPINC' ) ) {
+    die;
+}
+
+require_once 'vendor/autoload.php';
+
+define( 'RUNRACE_DIRPATH', plugin_dir_path( __FILE__ ) );
 
 register_activation_hook( __FILE__, 'wprace_activate' );
 register_deactivation_hook( __FILE__, 'wprace_deactivate' );
 //register_uninstall_hook(__FILE__, 'wprace_uninstall');
+
+// if ( ! class_exists( 'RunRacePlugin' ) ) {
+//     class RunRacePlugin {
+        
+//         /**
+//          * Constructor
+//          */
+//         public function __construct() {
+//             $this->setup_actions();
+//         }
+        
+//         /**
+//          * Setting up Hooks
+//          */
+//         public function setup_actions() {
+//             //Main plugin hooks
+//             register_activation_hook( DIR_PATH, array( 'RunRacePlugin', 'activate' ) );
+//             register_deactivation_hook( DIR_PATH, array( 'RunRacePlugin', 'deactivate' ) );
+//         }
+        
+//         /**
+//          * Activate callback
+//          */
+//         public static function activate() {
+//             //Activation code in here
+//         }
+        
+//         /**
+//          * Deactivate callback
+//          */
+//         public static function deactivate() {
+//             //Deactivation code in here
+//         }
+        
+//     }
+    
+    
+//     // instantiate the plugin class
+//     $wp_plugin_template = new RunRacePlugin();
+// }
+
 
 /**
  * [wprace_activate description]
