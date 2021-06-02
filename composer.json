@@ -12,19 +12,32 @@
             "role": "Developer"
         }
     ],
-    "repositories": [        
+    "repositories": [  
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org/"
+        },      
         {
             "type": "vcs",
             "url": "https://github.com/dtabirca/WP-Race-Plugin.git"
         }       
     ],
     "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
         "php": ">=7.4",
         "phpunit/phpunit": "^9.5"
-    },
+    },    
+    "config": {
+        "vendor-dir": "lib"
+    },    
     "autoload": {
-        "psr-4": { "RunRace\\": "src/" }
-    },
+        "psr-4": {
+            "RunRace\\": "includes/",
+            "RunRace\\Admin\\": "admin/"
+        }
+    },    
     "autoload-dev": {
         "psr-4": { "RunRace\\Tests\\": "tests/" }
     }

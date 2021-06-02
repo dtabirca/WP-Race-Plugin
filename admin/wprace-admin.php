@@ -7,8 +7,8 @@ function wrace_options_page()
         'RunRace',
         'RunRace',
         'manage_options',
-        plugin_dir_path(__FILE__) . 'view.php',
-        null,
+        'run_race',
+        'runrace_options',
         plugin_dir_url(__FILE__) . 'images/icon_wprace.png',
         20
     );
@@ -19,4 +19,41 @@ function wrace_options_page()
     wp_enqueue_script('wprace-admin-script', plugins_url( 'js/wprace.js', __FILE__ ));
     wp_enqueue_style('wprace-admin-style', plugins_url( 'css/wprace.css', __FILE__ ));
     wp_enqueue_style('jquery-datatables', '//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css');
+}
+
+function runrace_options()
+{
+    global $wpdb;
+    $data = [];
+    $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}runrace_course LIMIT 1;");
+    $data['race-name'] = $results[0]->name;
+    $data['race-options'] = json_decode($results[0]->options, true);
+    include_once plugin_dir_path(__FILE__) . 'view.php';
+}
+
+add_action( 'admin_action_rr_course_options', 'rr_course_options_admin_action' );
+function rr_course_options_admin_action()
+{
+    global $wpdb;
+    $wpdb->query( 
+        $wpdb->prepare("UPDATE {$wpdb->prefix}runrace_course
+            SET `updated` = %d, `name` = %s, `options` = %s",
+            array(
+                current_time('mysql'),
+                $_POST['race-name'],
+                json_encode(
+                    [
+                        'distance' => 21.00,
+                        'units' => 'metric',
+                        'type' => 'real',
+                        'team' => 'no',
+                        'time-limit' => $_POST['time-limit'],
+                        'registration-limit' => 100,
+                    ]
+                )                
+            )
+        )
+    );
+
+    wp_redirect( $_SERVER['HTTP_REFERER'] );
 }
