@@ -20,7 +20,26 @@
                             <label>Race Name</label>
                             <input name="race-name" value="<?php echo $data['race-name']; ?>">
                         </li>
-                        <li>...</li>  
+                        <li>
+                            <label>Distance</label>
+                            <input name="race-distance" value="<?php echo $data['race-options']['distance']; ?>"> km
+                        </li>                        
+                        <li>
+                            <label>Registration limit</label>
+                            <input name="participants-limit" value="<?php echo $data['race-options']['participants-limit']; ?>"> participants
+                        </li>
+                        <li>
+                            <label>Race time limits/penalties</label>
+                            <input name="time-limit" value="<?php echo $data['race-options']['time-limit']; ?>"> min
+                        </li>
+                        <li>
+                            <label>Units settings</label>
+                            <select name="units">
+                                <option value="metric" <?php echo ($data['race-options']['units']=='metric')?'selected':''; ?>>metric</option>
+                                <option value="imperial" <?php echo ($data['race-options']['units']=='imperial')?'selected':''; ?>>imperial</option>
+                            </select>
+                        </li>
+                        <li>TODO...</li>  
                         <li>
                             <input type="radio" checked name="racetype"> <label>Real Race (Mass/Wave/Individual Start,...)</label><br>
                               <input type="radio" name="racetype"> <label>Virtual Race (GPX Validation, ...)</label>
@@ -28,14 +47,9 @@
                         <li>...</li>              
                         <li><input type="checkbox" name="team"> <label>Team Scoring</label></li>                      
                         <li>...</li>              
-                        <li>Registration (requirements, limits)</li>
-                        <li>...</li>
-                        <li>Race time limits/penalties</li>
-                        <li><input name="time-limit" value="<?php echo $data['race-options']['time-limit']; ?>"> min</li>            
+
                         <li>Laps, Intermediary Checkpoint definition</li>
                         <li>...</li>            
-                        <li>Units settings</li>
-                        <li>...</li>
                     </ul>
                     <input type="submit" value="Save" />
                 </p>

@@ -9,3 +9,9 @@ table {
 .ui-draggable, .ui-droppable {
 	background-position: top;
 }
+
+input[name="race-distance"],
+input[name="participants-limit"],
+input[name="time-limit"] {
+	width: 50px;
+}

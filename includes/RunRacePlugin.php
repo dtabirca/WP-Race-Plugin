@@ -154,7 +154,7 @@ if (!class_exists('RunRacePlugin')) {
                             'type' => 'real',
                             'team' => 'no',
                             'time-limit' => 300,
-                            'registration-limit' => 100,
+                            'participants-limit' => 100,
                         ]
                     )
                 )

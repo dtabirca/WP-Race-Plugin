@@ -43,12 +43,12 @@ function rr_course_options_admin_action()
                 $_POST['race-name'],
                 json_encode(
                     [
-                        'distance' => 21.00,
-                        'units' => 'metric',
+                        'distance' => $_POST['race-distance'],
+                        'units' => $_POST['units'],
                         'type' => 'real',
                         'team' => 'no',
                         'time-limit' => $_POST['time-limit'],
-                        'registration-limit' => 100,
+                        'participants-limit' => $_POST['participants-limit'],
                     ]
                 )                
             )
