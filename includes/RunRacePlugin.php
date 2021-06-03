@@ -84,14 +84,14 @@ if (!class_exists('RunRacePlugin')) {
             $sql[] = "CREATE TABLE $table_name (
                 name tinytext NOT NULL,
                 options longtext NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             $table_name = "{$this->wpdb->prefix}runrace_checkpoint";
             $sql[] = "CREATE TABLE $table_name (
                 name tinytext NOT NULL,
                 distance float NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             $table_name = "{$this->wpdb->prefix}runrace_category";
@@ -99,17 +99,18 @@ if (!class_exists('RunRacePlugin')) {
                 name tinytext NOT NULL,
                 minage tinyint NOT NULL,
                 maxage tinyint NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
-            $table_name = "{$this->wpdb->prefix}runrace_runner";
+            $table_name = "{$this->wpdb->prefix}runrace_competitor";
             $sql[] = "CREATE TABLE $table_name (
                 id mediumint(9) NOT NULL AUTO_INCREMENT,
                 bib mediumint(9) NOT NULL,
                 name tinytext NOT NULL,
                 age tinyint NOT NULL,
+                sex varchar(20) NOT NULL,
                 status tinyint NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
                   PRIMARY KEY  (id)
             ) $charset_collate;";
 
@@ -118,21 +119,21 @@ if (!class_exists('RunRacePlugin')) {
                 checkpoint tinytext NOT NULL,
                 competitor tinyint NOT NULL,
                 time tinyint NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             $table_name = "{$this->wpdb->prefix}runrace_result";
             $sql[] = "CREATE TABLE $table_name (
                 competitor tinyint NOT NULL,
                 position tinyint NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             $table_name = "{$this->wpdb->prefix}runrace_certificate";
             $sql[] = "CREATE TABLE $table_name (
                 competitor tinyint NOT NULL,
                 certificate tinyint NOT NULL,
-                updated datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
+                updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -153,8 +154,8 @@ if (!class_exists('RunRacePlugin')) {
                             'units' => 'metric',
                             'type' => 'real',
                             'team' => 'no',
-                            'time-limit' => 300,
-                            'participants-limit' => 100,
+                            'time_limit' => 300,
+                            'participants_limit' => 100,
                         ]
                     )
                 )
@@ -176,7 +177,7 @@ if (!class_exists('RunRacePlugin')) {
             $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_course;");
             $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_checkpoint;");
             $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_category;");
-            $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_runner;");
+            $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_competitor;");
             $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_timing;");
             $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_result;");
             $self->wpdb->query("DROP TABLE IF EXISTS {$self->wpdb->prefix}runrace_certificate;");

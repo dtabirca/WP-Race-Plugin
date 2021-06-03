@@ -10,8 +10,8 @@ table {
 	background-position: top;
 }
 
-input[name="race-distance"],
-input[name="participants-limit"],
-input[name="time-limit"] {
+input[name="race_distance"],
+input[name="participants_limit"],
+input[name="time_limit"] {
 	width: 50px;
 }

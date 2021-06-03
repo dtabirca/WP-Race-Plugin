@@ -9,7 +9,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       WP RunRace
+ * Plugin Name:       RunRace
  * Plugin URI:        https://github.com/dtabirca/WP-Race-Plugin
  * Description:       Manages running competitions.
  * Version:           0.1
