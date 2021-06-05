@@ -8,7 +8,7 @@ function wrace_options_page()
         'RunRace',
         'manage_options',
         'run_race',
-        'runrace_options',
+        'runrace_load_admin_tabs',
         plugin_dir_url(__FILE__) . 'images/icon_wprace.png',
         20
     );
@@ -21,7 +21,7 @@ function wrace_options_page()
     wp_enqueue_style('jquery-datatables', '//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css');
 }
 
-function runrace_options()
+function runrace_load_admin_tabs()
 {
     global $wpdb;
     $data = [];
@@ -31,6 +31,37 @@ function runrace_options()
     $competitors = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}runrace_competitor;");
     $data['race_competitors'] = $competitors;
     include_once plugin_dir_path(__FILE__) . 'view.php';
+}
+
+add_action('admin_action_rr_registered_competitors', 'rr_registered_competitors_admin_action');
+function rr_registered_competitors_admin_action()
+{
+    global $wpdb;
+    $wpdb->query(
+        $wpdb->prepare(
+            "UPDATE {$wpdb->prefix}runrace_competitor
+            SET `updated` = %d, `status` = %d",
+            array(
+                current_time('mysql'),
+                0
+            )
+        )
+    );
+    foreach ($_POST['status'] as $bib) {
+        $wpdb->query(
+            $wpdb->prepare(
+                "UPDATE {$wpdb->prefix}runrace_competitor
+                SET `updated` = %d, `status` = %d
+                WHERE `bib` = %d;",
+                array(
+                    current_time('mysql'),
+                    1,
+                    $bib
+                )
+            )
+        );
+    }
+    wp_redirect($_SERVER['HTTP_REFERER'] . '#tabs-2');
 }
 
 add_action('admin_action_rr_course_options', 'rr_course_options_admin_action');
@@ -58,7 +89,7 @@ function rr_course_options_admin_action()
         )
     );
 
-    wp_redirect($_SERVER['HTTP_REFERER']);
+    wp_redirect($_SERVER['HTTP_REFERER'] . '#tabs-1');
 }
 
 add_action('admin_action_rr_import_competitors', 'rr_import_competitors_admin_action');
@@ -124,5 +155,5 @@ function rr_import_competitors_admin_action()
         }
     }
 
-    wp_redirect($_SERVER['HTTP_REFERER']);
+    wp_redirect($_SERVER['HTTP_REFERER'] . '#tabs-2');
 }

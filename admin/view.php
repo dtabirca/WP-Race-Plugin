@@ -56,32 +56,38 @@
             </form>    
         </div>
         <div id="tabs-2">
-            <table id="registered" class="display">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Bib</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Sex</th>
-                        <th>Validated</th>
-                    </tr>
-                </thead>
-                <tbody>
-<?php
-foreach ($data['race_competitors'] as $competitor) {
-    echo '<tr>
-            <td>' . $competitor->id . '</td>
-            <td>' . $competitor->bib . '</td>
-            <td>' . $competitor->name . '</td>
-            <td>' . $competitor->age . '</td>
-            <td>' . $competitor->sex . '</td>
-            <td>' . $competitor->status . '</td>
-        </tr>';
-}
-?>
-                </tbody>
-            </table>
+            <form method="POST" action="<?php echo admin_url('admin.php'); ?>">
+                <input type="hidden" name="action" value="rr_registered_competitors" />
+                <table id="registered" class="display">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Bib</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Sex</th>
+                            <th>Validated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    <?php
+    foreach ($data['race_competitors'] as $competitor) {
+        echo '<tr>
+                <td>' . $competitor->id . '</td>
+                <td>' . $competitor->bib . '</td>
+                <td>' . $competitor->name . '</td>
+                <td>' . $competitor->age . '</td>
+                <td>' . $competitor->sex . '</td>
+                <td>
+                    <input name="status[]" type="checkbox" value="' . $competitor->bib . '"' . (((int)$competitor->status === 1) ? ' checked' : '') . '/>
+                </td>
+            </tr>';
+    }
+    ?>
+                    </tbody>
+                </table>
+                <input type="submit" value="Save" />
+            </form>             
         </div>
         <div id="tabs-3">
             <table id="results" class="display">
