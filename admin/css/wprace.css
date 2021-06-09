@@ -9,9 +9,17 @@ table {
 .ui-draggable, .ui-droppable {
 	background-position: top;
 }
-
+/*
 input[name="race_distance"],
 input[name="participants_limit"],
 input[name="time_limit"] {
 	width: 50px;
 }
+
+select:hover{
+	color: black !important;
+}
+
+input[type="text"] {
+	width: auto !important;
+}*/

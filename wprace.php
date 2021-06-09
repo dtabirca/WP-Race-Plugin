@@ -12,7 +12,7 @@
  * Plugin Name:       RunRace
  * Plugin URI:        https://github.com/dtabirca/WP-Race-Plugin
  * Description:       Manages running competitions.
- * Version:           0.1
+ * Version:           0.2
  * Requires at least: 5.7
  * Requires PHP:      7.4
  * Author:            Daniel Tabirca

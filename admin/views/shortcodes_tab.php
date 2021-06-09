@@ -1,0 +1,1 @@
+Plugin specific shortcodes to be included anywhere in the content.

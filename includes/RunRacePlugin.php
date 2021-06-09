@@ -105,10 +105,11 @@ if (!class_exists('RunRacePlugin')) {
             $table_name = "{$this->wpdb->prefix}runrace_competitor";
             $sql[] = "CREATE TABLE $table_name (
                 id mediumint(9) NOT NULL AUTO_INCREMENT,
-                bib mediumint(9) NOT NULL,
+                bib mediumint(5) NOT NULL,
                 name tinytext NOT NULL,
                 age tinyint NOT NULL,
                 sex varchar(20) NOT NULL,
+                category varchar(50) NOT NULL,
                 status tinyint NOT NULL,
                 updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
                   PRIMARY KEY  (id)
@@ -117,21 +118,21 @@ if (!class_exists('RunRacePlugin')) {
             $table_name = "{$this->wpdb->prefix}runrace_timing";
             $sql[] = "CREATE TABLE $table_name (
                 checkpoint tinytext NOT NULL,
-                competitor tinyint NOT NULL,
-                time tinyint NOT NULL,
+                competitor mediumint(5) NOT NULL,
+                time time NOT NULL,
                 updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             $table_name = "{$this->wpdb->prefix}runrace_result";
             $sql[] = "CREATE TABLE $table_name (
-                competitor tinyint NOT NULL,
+                competitor mediumint(5) NOT NULL,
                 position tinyint NOT NULL,
                 updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
 
             $table_name = "{$this->wpdb->prefix}runrace_certificate";
             $sql[] = "CREATE TABLE $table_name (
-                competitor tinyint NOT NULL,
+                competitor mediumint(5) NOT NULL,
                 certificate tinyint NOT NULL,
                 updated datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
             ) $charset_collate;";
@@ -156,6 +157,14 @@ if (!class_exists('RunRacePlugin')) {
                             'team' => 'no',
                             'time_limit' => 300,
                             'participants_limit' => 100,
+                            'age_limits' => [1, 99],
+                            'categories' => [
+                                                'm_19-99', 'w_19-99', 'm_19-29', 'w_19-29',
+                                                'm_30-39', 'w_30-39', 'm_40-49', 'w_40-49',
+                                                'm_30-39', 'w_30-39', 'm_40-49', 'w_40-49',
+                                                'm_50-59', 'w_50-59', 'm_60-69', 'w_60-69',
+                                                'm_70-79', 'w_70-79', 'm_80-99', 'w_80-99',
+                                            ],
                         ]
                     )
                 )
