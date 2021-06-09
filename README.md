@@ -11,4 +11,4 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
 Manages running competitions.
 
-![screenshot](https://github.com/dtabirca/WP-Race-Plugin/manage-content.png "Admin Screen")
+![screenshot](https://github.com/dtabirca/WP-Race-Plugin/screenshot.png "Admin Screen")
